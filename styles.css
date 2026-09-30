@@ -35,7 +35,7 @@ body {
   background: var(--surface);
 }
 
-/* Locked shell: header and call bar stay put, content scrolls between them */
+/* Locked shell: header stays put, content scrolls beneath it */
 .shell {
   display: flex;
   flex-direction: column;
@@ -43,8 +43,7 @@ body {
 }
 
 .header,
-.ribbon,
-.callbar {
+.ribbon {
   flex-shrink: 0;
   user-select: none;
   -webkit-user-select: none;
@@ -156,6 +155,13 @@ body {
   overflow-y: auto;
   overscroll-behavior-y: contain;
   container-type: size;
+}
+
+/* Room at the end of the page so the call bubble never covers the last button */
+.content::after {
+  content: "";
+  display: block;
+  height: calc(4.5rem + env(safe-area-inset-bottom));
 }
 
 .vehicle,
@@ -672,35 +678,35 @@ body {
   opacity: 0.8;
 }
 
-.callbar {
-  padding: 0.75rem 1rem calc(0.75rem + env(safe-area-inset-bottom));
-  border-top: 1px solid var(--line);
-  background: var(--surface);
-}
-
-.call-button {
+/* Floating call bubble, pinned to the bottom right over the page */
+.call-bubble {
+  position: fixed;
+  right: calc(1rem + env(safe-area-inset-right));
+  bottom: calc(1rem + env(safe-area-inset-bottom));
+  z-index: 8;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  width: 100%;
-  max-width: 30rem;
   min-height: 3.25rem;
-  margin: 0 auto;
-  border-radius: 0.5rem;
+  padding: 0 1.375rem 0 1.125rem;
+  border-radius: 999px;
   background: var(--red);
   color: #fff;
   font-size: 1.125rem;
   font-weight: 600;
   text-decoration: none;
+  box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.3);
+  user-select: none;
+  -webkit-user-select: none;
 }
 
-.call-button:active {
-  transform: scale(0.98);
+.call-bubble:active {
+  transform: scale(0.96);
   opacity: 0.9;
 }
 
-.call-button:focus-visible,
+.call-bubble:focus-visible,
 .action:focus-visible,
 .sort-toggle:focus-visible,
 .sort-options button:focus-visible,
@@ -719,7 +725,7 @@ body {
     color: var(--red);
   }
 
-  .call-button:hover {
+  .call-bubble:hover {
     background: #930101;
   }
 }
