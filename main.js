@@ -1,6 +1,19 @@
+// Cars are not typed into these pages. Each one is a profile kept in the
+// private dashboard, and the pages load the current list from here.
+const CARS_URL = "https://us-central1-do-favor-demo.cloudfunctions.net/cars?site=auto-favors";
+const CARS_CACHE = "af_cars";
+const STATUS_LABELS = { sold: "SOLD", "coming soon": "COMING SOON" };
+
+const escapeHtml = (value) =>
+  String(value ?? "").replace(/[&<>"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[char]));
+
+const carName = (car) => `${car.year} ${car.make} ${car.model}`;
+
 // Hero slideshow: crossfades to the next photo on a fixed interval, looping.
 // Tapping the photo card skips to the next photo with a bounce.
-document.querySelectorAll(".slides").forEach((slides) => {
+let slideTimers = [];
+
+const startSlides = (slides) => {
   const photos = Array.from(slides.querySelectorAll(".slide"));
   if (photos.length < 2) return;
 
@@ -25,7 +38,9 @@ document.querySelectorAll(".slides").forEach((slides) => {
   // Restart the clock after a tap so the new photo gets its full time on screen.
   const restartTimer = () => {
     clearInterval(timer);
+    slideTimers = slideTimers.filter((id) => id !== timer);
     timer = setInterval(advance, interval);
+    slideTimers.push(timer);
   };
 
   const bounce = () => {
@@ -51,7 +66,58 @@ document.querySelectorAll(".slides").forEach((slides) => {
 
   preload(1);
   restartTimer();
-});
+};
+
+const stopSlides = () => {
+  slideTimers.forEach(clearInterval);
+  slideTimers = [];
+};
+
+// One car: photo slideshow with its price, then its name, mileage and buttons.
+const vehicleCard = (car, heading, eager) => {
+  const name = carName(car);
+  const section = document.createElement("section");
+  section.className = "vehicle";
+  section.dataset.type = car.category;
+  section.dataset.year = car.year;
+  section.dataset.miles = car.miles ?? 0;
+  section.dataset.price = car.price ?? 0;
+
+  const slides = car.photos
+    .map((photo, index) => {
+      const alt = photo.alt || `${name}, photo ${index + 1}`;
+      const lazy = index === 0 && eager ? "" : ' loading="lazy"';
+      return `<img class="slide${index === 0 ? " is-active" : ""}" src="${escapeHtml(photo.url)}" alt="${escapeHtml(alt)}"${lazy}>`;
+    })
+    .join("");
+  const tappable = car.photos.length > 1 ? ` role="button" tabindex="0" aria-label="Next photo of the ${escapeHtml(name)}"` : "";
+  const price = car.price == null ? "" : `<div class="price-pill">$${car.price.toLocaleString("en-US")}</div>`;
+  const status = STATUS_LABELS[car.status]
+    ? `<div class="status-pill status-${car.status.replace(/ /g, "-")}">${STATUS_LABELS[car.status]}</div>`
+    : "";
+  const miles = car.miles == null ? "" : `<span class="vehicle-miles">${car.miles.toLocaleString("en-US")} mi</span>`;
+  const moreInfo = car.moreInfoUrl
+    ? `<a class="action action-info" href="${escapeHtml(car.moreInfoUrl)}"><span>MORE INFO</span></a>`
+    : "";
+
+  section.innerHTML = `
+    <div class="hero"${tappable}>
+      <div class="slides" data-interval="6000">${slides}</div>
+      ${price}
+      ${status}
+    </div>
+    <div class="vehicle-info">
+      <div class="vehicle-text">
+        <${heading} class="vehicle-name">${escapeHtml(name)}</${heading}>
+        ${miles}
+      </div>
+      <div class="vehicle-actions">
+        ${moreInfo}
+        <a class="action action-call" href="tel:+18046608899"><span>CALL US</span></a>
+      </div>
+    </div>`;
+  return section;
+};
 
 // Burger menu: opens a panel under the header; closes on a link tap,
 // a tap anywhere else, or the Escape key.
@@ -94,12 +160,31 @@ if (burger && menu) {
   });
 }
 
+// Homepage: the featured car is the big photo at the top. With no car
+// marked featured, the first available one stands in.
+let featured = document.querySelector(".vehicle.is-featured");
+
+const showFeatured = (cars) => {
+  if (!featured) return;
+  const car = cars.find((item) => item.featured) || cars.find((item) => item.status === "available") || cars[0];
+  const divider = featured.nextElementSibling;
+  featured.hidden = !car;
+  if (divider && divider.matches(".divider")) divider.hidden = !car;
+  if (!car) return;
+
+  const card = vehicleCard(car, "h1", true);
+  card.classList.add("is-featured");
+  featured.replaceWith(card);
+  featured = card;
+  startSlides(card.querySelector(".slides"));
+};
+
 // Inventory: filter by type (several at once; none selected shows all)
 // and sort. Defaults to newest first.
 const list = document.querySelector(".inventory-list");
+let showInventory = () => {};
 
 if (list) {
-  const vehicles = Array.from(list.querySelectorAll(".vehicle"));
   const toggle = document.querySelector(".sort-toggle");
   const panel = document.querySelector(".sort-panel");
   const typeButtons = Array.from(panel.querySelectorAll("[data-type]"));
@@ -109,6 +194,7 @@ if (list) {
 
   const types = new Set();
   let sort = "year-desc";
+  let vehicles = [];
 
   const render = () => {
     const [field, direction] = sort.split("-");
@@ -135,6 +221,12 @@ if (list) {
     sortButtons.forEach((button) => {
       button.setAttribute("aria-pressed", String(button.dataset.sort === sort));
     });
+  };
+
+  showInventory = (cars) => {
+    vehicles = cars.map((car, index) => vehicleCard(car, "h2", index === 0));
+    render();
+    vehicles.forEach((vehicle) => startSlides(vehicle.querySelector(".slides")));
   };
 
   const setOpen = (open) => {
@@ -183,6 +275,40 @@ if (list) {
   new URLSearchParams(location.search).getAll("type").forEach((type) => {
     if (typeButtons.some((button) => button.dataset.type === type)) types.add(type);
   });
-
-  render();
 }
+
+// Load the cars. The copy saved from the last visit shows right away,
+// then the current list replaces it if anything changed.
+const showCars = (cars) => {
+  stopSlides();
+  showFeatured(cars);
+  showInventory(cars);
+};
+
+const loadCars = async () => {
+  let saved = null;
+  try {
+    saved = localStorage.getItem(CARS_CACHE);
+    if (saved) showCars(JSON.parse(saved));
+  } catch (error) {
+    saved = null;
+  }
+
+  try {
+    const response = await fetch(CARS_URL);
+    if (!response.ok) throw new Error(`Cars request failed: ${response.status}`);
+    const cars = (await response.json()).cars;
+    const current = JSON.stringify(cars);
+    if (current === saved) return;
+    showCars(cars);
+    try {
+      localStorage.setItem(CARS_CACHE, current);
+    } catch (error) {
+      // Private browsing can block storage; the page still works without it.
+    }
+  } catch (error) {
+    if (!saved) showCars([]);
+  }
+};
+
+loadCars();

@@ -607,6 +607,42 @@ body {
   line-height: 1.4;
 }
 
+/* Sold and coming-soon cars carry a label opposite the price */
+.status-pill {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 2;
+  padding: 0.375rem 0.875rem;
+  border: 2px solid #000;
+  border-radius: 999px;
+  background: #000;
+  color: #fff;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.6;
+}
+
+.status-coming-soon {
+  border-color: var(--green);
+  background: var(--green);
+}
+
+/* A car with a single photo has nothing to skip to */
+.hero:not([role]) {
+  cursor: default;
+}
+
+/* Placeholder shown for the moment before the cars arrive */
+.vehicle.is-loading .hero {
+  background: var(--line);
+}
+
+.vehicle.is-loading .vehicle-info {
+  min-height: 7.5rem;
+}
+
 .vehicle-info {
   display: flex;
   align-items: flex-start;
@@ -754,6 +790,13 @@ body {
     left: 1.25rem;
     padding: 0.5rem 1.25rem;
     font-size: 1.5rem;
+  }
+
+  .status-pill {
+    top: 1.25rem;
+    right: 1.25rem;
+    padding: 0.5rem 1.25rem;
+    font-size: 1.125rem;
   }
 
   .vehicle-name {
