@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Inventory | Auto Favors</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="header">
+      <a class="logo" href="./" aria-label="Auto Favors home">
+        <img src="assets/logo.png" alt="Auto Favors" width="300" height="67">
+      </a>
+      <button class="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="menu" id="menu" aria-label="Main" hidden>
+        <a href="./">HOME</a>
+        <a href="inventory.html">INVENTORY</a>
+        <a href="https://www.autofavors.com/apply-online/">APPLY NOW</a>
+        <a href="https://www.autofavors.com/about-us/">ABOUT US</a>
+        <a href="https://www.autofavors.com/contact-us/">CONTACT US</a>
+      </nav>
+    </header>
+
+    <div class="ribbon" aria-label="Inventory is always up to date. Financing available. Call us now!">
+      <div class="ribbon-track" aria-hidden="true">
+        <div class="ribbon-group">
+          <span>Inventory is always up to date</span><i>|</i>
+          <span>Financing Available</span><i>|</i>
+          <span>Call us now!</span><i>|</i>
+        </div>
+        <div class="ribbon-group">
+          <span>Inventory is always up to date</span><i>|</i>
+          <span>Financing Available</span><i>|</i>
+          <span>Call us now!</span><i>|</i>
+        </div>
+        <div class="ribbon-group">
+          <span>Inventory is always up to date</span><i>|</i>
+          <span>Financing Available</span><i>|</i>
+          <span>Call us now!</span><i>|</i>
+        </div>
+        <div class="ribbon-group">
+          <span>Inventory is always up to date</span><i>|</i>
+          <span>Financing Available</span><i>|</i>
+          <span>Call us now!</span><i>|</i>
+        </div>
+      </div>
+    </div>
+
+    <main class="content">
+      <h1 class="sr-only">Inventory</h1>
+
+      <div class="toolbar">
+        <p class="result-count" aria-live="polite">4 vehicles</p>
+        <div class="sort">
+          <button class="sort-toggle" type="button" aria-expanded="false" aria-controls="sort-panel">SORT &amp; FILTER<svg class="chevron" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="sort-panel" id="sort-panel" hidden>
+            <p class="sort-label">TYPE:</p>
+            <div class="sort-options sort-types">
+              <button type="button" data-type="luxury" aria-pressed="false">LUXURY</button>
+              <button type="button" data-type="economy" aria-pressed="false">ECONOMY</button>
+              <button type="button" data-type="commercial" aria-pressed="false">COMMERCIAL</button>
+            </div>
+            <p class="sort-label">SORT BY:</p>
+            <div class="sort-options sort-orders">
+              <button type="button" data-sort="year-desc" aria-pressed="true">NEWEST</button>
+              <button type="button" data-sort="year-asc" aria-pressed="false">OLDEST</button>
+              <button type="button" data-sort="miles-asc" aria-pressed="false">MILEAGE LOW</button>
+              <button type="button" data-sort="miles-desc" aria-pressed="false">MILEAGE HIGH</button>
+              <button type="button" data-sort="price-asc" aria-pressed="false">PRICE LOW</button>
+              <button type="button" data-sort="price-desc" aria-pressed="false">PRICE HIGH</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="toolbar-line">
+
+      <div class="inventory-list">
+      <section class="vehicle" data-type="economy" data-year="2018" data-miles="118435" data-price="15394">
+        <div class="hero" role="button" tabindex="0" aria-label="Next photo of the 2018 Toyota RAV4">
+          <div class="slides" data-interval="6000">
+            <img class="slide is-active" src="assets/rav4/01.jpg" alt="2018 Toyota RAV4, front three-quarter view" width="1600" height="900" loading="lazy">
+            <img class="slide" src="assets/rav4/02.jpg" alt="2018 Toyota RAV4, dashboard" width="1600" height="900" loading="lazy">
+            <img class="slide" src="assets/rav4/03.jpg" alt="2018 Toyota RAV4, front view" width="1600" height="900" loading="lazy">
+            <img class="slide" src="assets/rav4/04.jpg" alt="2018 Toyota RAV4, driver's seat" width="1600" height="900" loading="lazy">
+            <img class="slide" src="assets/rav4/05.jpg" alt="2018 Toyota RAV4, side view" width="1600" height="900" loading="lazy">
+            <img class="slide" src="assets/rav4/06.jpg" alt="2018 Toyota RAV4, steering wheel and console" width="1600" height="900" loading="lazy">
+            <img class="slide" src="assets/rav4/07.jpg" alt="2018 Toyota RAV4, rear view" width="1600" height="900" loading="lazy">
+            <img class="slide" src="assets/rav4/08.jpg" alt="2018 Toyota RAV4, cargo area" width="1600" height="900" loading="lazy">
+            <img class="slide" src="assets/rav4/09.jpg" alt="2018 Toyota RAV4, front three-quarter view" width="1600" height="900" loading="lazy">
+            <img class="slide" src="assets/rav4/10.jpg" alt="2018 Toyota RAV4, backup camera screen" width="1600" height="900" loading="lazy">
+          </div>
+
+          <div class="price-pill">$15,394</div>
+        </div>
+
+        <div class="vehicle-info">
+          <div class="vehicle-text">
+            <h2 class="vehicle-name">2018 Toyota RAV4</h2>
+            <span class="vehicle-miles">118,435 mi</span>
+          </div>
+          <div class="vehicle-actions">
+            <a class="action action-info" href="https://www.autofavors.com/inventory/toyota/rav4/481147/"><span>MORE INFO</span></a>
+            <a class="action action-call" href="tel:+18046608899"><span>CALL US</span></a>
+          </div>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <section class="vehicle" data-type="economy" data-year="2015" data-miles="80808" data-price="13394">
+        <div class="hero" role="button" tabindex="0" aria-label="Next photo of the 2015 Honda Civic">
+          <div class="slides" data-interval="6000">
+            <img class="slide is-active" src="assets/civic/01.jpg" alt="2015 Honda Civic, front three-quarter view" width="1600" height="900" loading="lazy">
+            <img class="slide" src="assets/civic/02.jpg" alt="2015 Honda Civic, dashboard" width="1600" height="900" loading="lazy">
+            <img class="slide" src="assets/civic/03.jpg" alt="2015 Honda Civic, front view" width="1600" height="900" loading="lazy">
+            <img class="slide" src="assets/civic/04.jpg" alt="2015 Honda Civic, front seats" width="1600" height="900" loading="lazy">
+            <img class="slide" src="assets/civic/05.jpg" alt="2015 Honda Civic, side view" width="1600" height="900" loading="lazy">
+            <img class="slide" src="assets/civic/06.jpg" alt="2015 Honda Civic, steering wheel and touchscreen" width="1600" height="900" loading="lazy">
+            <img class="slide" src="assets/civic/07.jpg" alt="2015 Honda Civic, rear view" width="1600" height="900" loading="lazy">
+            <img class="slide" src="assets/civic/08.jpg" alt="2015 Honda Civic, rear seat" width="1600" height="900" loading="lazy">
+            <img class="slide" src="assets/civic/09.jpg" alt="2015 Honda Civic, rear three-quarter view" width="1600" height="900" loading="lazy">
+            <img class="slide" src="assets/civic/10.jpg" alt="2015 Honda Civic, backup camera screen" width="1600" height="900" loading="lazy">
+          </div>
+
+          <div class="price-pill">$13,394</div>
+        </div>
+
+        <div class="vehicle-info">
+          <div class="vehicle-text">
+            <h2 class="vehicle-name">2015 Honda Civic</h2>
+            <span class="vehicle-miles">80,808 mi</span>
+          </div>
+          <div class="vehicle-actions">
+            <a class="action action-info" href="https://www.autofavors.com/inventory/honda/civic/049902/"><span>MORE INFO</span></a>
+            <a class="action action-call" href="tel:+18046608899"><span>CALL US</span></a>
+          </div>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <section class="vehicle" data-type="luxury" data-year="2013" data-miles="111203" data-price="15394">
+        <div class="hero" role="button" tabindex="0" aria-label="Next photo of the 2013 Lexus RX">
+          <div class="slides" data-interval="6000">
+            <img class="slide is-active" src="assets/rx/01.jpg" alt="2013 Lexus RX, front three-quarter view" width="1600" height="900" loading="lazy">
+            <img class="slide" src="assets/rx/02.jpg" alt="2013 Lexus RX, dashboard" width="1600" height="900" loading="lazy">
+            <img class="slide" src="assets/rx/03.jpg" alt="2013 Lexus RX, front view" width="1600" height="900" loading="lazy">
+            <img class="slide" src="assets/rx/04.jpg" alt="2013 Lexus RX, driver's seat" width="1600" height="900" loading="lazy">
+            <img class="slide" src="assets/rx/05.jpg" alt="2013 Lexus RX, side view" width="1600" height="900" loading="lazy">
+            <img class="slide" src="assets/rx/06.jpg" alt="2013 Lexus RX, steering wheel and console" width="1600" height="900" loading="lazy">
+            <img class="slide" src="assets/rx/07.jpg" alt="2013 Lexus RX, rear three-quarter view" width="1600" height="900" loading="lazy">
+            <img class="slide" src="assets/rx/08.jpg" alt="2013 Lexus RX, rear seat" width="1600" height="900" loading="lazy">
+            <img class="slide" src="assets/rx/09.jpg" alt="2013 Lexus RX, rear three-quarter view, passenger side" width="1600" height="900" loading="lazy">
+            <img class="slide" src="assets/rx/10.jpg" alt="2013 Lexus RX, cargo area" width="1600" height="900" loading="lazy">
+          </div>
+
+          <div class="price-pill">$15,394</div>
+        </div>
+
+        <div class="vehicle-info">
+          <div class="vehicle-text">
+            <h2 class="vehicle-name">2013 Lexus RX</h2>
+            <span class="vehicle-miles">111,203 mi</span>
+          </div>
+          <div class="vehicle-actions">
+            <a class="action action-info" href="https://www.autofavors.com/inventory/lexus/rx/174867/"><span>MORE INFO</span></a>
+            <a class="action action-call" href="tel:+18046608899"><span>CALL US</span></a>
+          </div>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <section class="vehicle" data-type="economy" data-year="2007" data-miles="150550" data-price="7394">
+        <div class="hero" role="button" tabindex="0" aria-label="Next photo of the 2007 Honda Accord">
+          <div class="slides" data-interval="6000">
+            <img class="slide is-active" src="assets/accord/01.jpg" alt="2007 Honda Accord, front three-quarter view" width="1600" height="900">
+            <img class="slide" src="assets/accord/02.jpg" alt="2007 Honda Accord, dashboard" width="1600" height="900">
+            <img class="slide" src="assets/accord/03.jpg" alt="2007 Honda Accord, front view" width="1600" height="900" loading="lazy">
+            <img class="slide" src="assets/accord/04.jpg" alt="2007 Honda Accord, driver's seat" width="1600" height="900" loading="lazy">
+            <img class="slide" src="assets/accord/05.jpg" alt="2007 Honda Accord, front three-quarter view, passenger side" width="1600" height="900" loading="lazy">
+            <img class="slide" src="assets/accord/06.jpg" alt="2007 Honda Accord, front seats and moonroof" width="1600" height="900" loading="lazy">
+            <img class="slide" src="assets/accord/07.jpg" alt="2007 Honda Accord, side view" width="1600" height="900" loading="lazy">
+            <img class="slide" src="assets/accord/08.jpg" alt="2007 Honda Accord, rear seat" width="1600" height="900" loading="lazy">
+            <img class="slide" src="assets/accord/09.jpg" alt="2007 Honda Accord, rear view" width="1600" height="900" loading="lazy">
+            <img class="slide" src="assets/accord/10.jpg" alt="2007 Honda Accord, steering wheel and console" width="1600" height="900" loading="lazy">
+          </div>
+
+          <div class="price-pill">$7,394</div>
+        </div>
+
+        <div class="vehicle-info">
+          <div class="vehicle-text">
+            <h2 class="vehicle-name">2007 Honda Accord</h2>
+            <span class="vehicle-miles">150,550 mi</span>
+          </div>
+          <div class="vehicle-actions">
+            <a class="action action-info" href="https://www.autofavors.com/inventory/honda/accord/060665/"><span>MORE INFO</span></a>
+            <a class="action action-call" href="tel:+18046608899"><span>CALL US</span></a>
+          </div>
+        </div>
+      </section>
+      </div>
+
+      <p class="empty-state" hidden>No vehicles of this type right now. Call us and we'll help you find one.</p>
+    </main>
+
+    <footer class="callbar">
+      <a class="call-button" href="tel:+18046608899">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1L6.6 10.8Z"/></svg>
+        Call (804) 660-8899
+      </a>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
